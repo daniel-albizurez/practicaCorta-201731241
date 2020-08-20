@@ -24,15 +24,21 @@ namespace AnalizadorLexico
         public MainWindow()
         {
             InitializeComponent();
+            //Se coloca el enfoque en la caja de texto para facilitar el ingreso de la oración
             txtOracion.Focus();
+            //Se quitan las columnas que pudieran estar en la tabla
             tblResultado.Columns.Clear();
+            //Se genera una columna para contener texto
+            //Con encabezado Tipo, ancho 125 (Ya que la tabla tiene un ancho de 250) y para tener la información del atributo "tipo" en el objeto de cada fila
             DataGridTextColumn tipo = new DataGridTextColumn
             {
                 Header = "Tipo",
                 Width = 125,
                 Binding = new Binding("tipo")
             };
+            //Se agrega la columna en la tabla
             tblResultado.Columns.Add(tipo);
+            //Se repite el proceso anterior
             DataGridTextColumn lexema = new DataGridTextColumn
             {
                 Header = "Lexema",
@@ -44,10 +50,13 @@ namespace AnalizadorLexico
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //Se crea un analizador
             Analizador_Lexico analizador = new Analizador_Lexico();
+            //Se eliminan las filas existentes en la tabla
             tblResultado.Items.Clear();
+            //Se analiza el texto en la caja de texto y se almacenan los resultados
             string[,] resultado = analizador.analizar(txtOracion.Text);
-            
+            //Se agrega cada resultado a la tabla
             for (int i = 0; i < resultado.GetLength(0); i++)
             {
                 tblResultado.Items.Add(new Token() { tipo = resultado[i, 0], lexema = resultado[i, 1] });

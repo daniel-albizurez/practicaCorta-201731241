@@ -9,11 +9,18 @@ namespace AnalizadorLexico.modelo
 {
     class Analizador_Lexico
     {
-        private string letras = "abcdefghijklmnñopqrstuvwxyz";
-        private string numeros = "0123456789";
-        public string[,] analizar(string fila)
+        // Constantes de conjuntos de caracteres aceptados
+        private const string LETRAS = "abcdefghijklmnñopqrstuvwxyz";
+        private const string NUMEROS = "0123456789";
+
+        // Método analizar
+        // Recibe un texto el cual es dividido en palabras (Separadas por un espacio)
+        // Utiliza los métodos definidos abajo, para evaluar el tipo de lexema que recibe
+        // Almacena el tipo y la palabra en un arreglo de tipo string de 2 dimensiones
+        // Devuelve el arreglo
+        public string[,] analizar(string texto)
         {
-            string[] palabras = fila.Split(' ');
+            string[] palabras = texto.Split(' ');
             string[,] resultado = new string[palabras.Length, 2];
             string tipo;
             for (int i = 0; i < palabras.Length; i++)
@@ -29,27 +36,36 @@ namespace AnalizadorLexico.modelo
             }
             return resultado;
         }
-
+        // Método para evaluar si una palabra es un identificador
+        // Recibe una palabra, la cual recorre caracter por caracter
+        // Evalua que el caracter sea una letra
+        // Devuelve true o false dependiendo si la palabra es un identificador
         public bool esIdentificador(string palabra)
         {
             bool identificador = true && palabra.Length > 0;
             foreach (char caracter in palabra.ToLower())
             {
-                identificador &= letras.Contains(caracter) ;
+                identificador &= LETRAS.Contains(caracter) ;
             }
             return identificador;
         }
-
+        // Método para evaluar si una palabra, corresponde a un número entero
+        // Recibe una palabra, la cual recorre caracter por caracter
+        // Evalua que el caracter sea un número
+        // Devuelve true o false dependiendo si la palabra es un número
         public bool esEntero(string palabra)
         {
             bool numero = true && palabra.Length > 0;
             foreach (char caracter in palabra)
             {
-                numero &= numeros.Contains(caracter);
+                numero &= NUMEROS.Contains(caracter);
             }
             return numero;
         }
-
+        // Método para evaluar si una palabra, corresponde a un número decimal
+        // Recibe una palabra, la cual es separada en partes, alrededor de un punto
+        // Si las partes son 2 evalua que cada parte corresponda a un número entero
+        // Devuelve true o false dependiendo si la palabra es un número decimal
         public bool esDecimal(string palabra)
         {
             string[] parte = palabra.Split('.');
@@ -66,7 +82,11 @@ namespace AnalizadorLexico.modelo
             }
 
         }
-
+        // Método para evaluar si una palabra, corresponde a una moneda
+        // Recibe una palabra
+        // Evalua que el primer caracter sea igual a Q
+        // Luego evalua que el resto de la cadena sea un número
+        // Devuelve true o false dependiendo si la palabra es una moneda
         public bool esMoneda(string palabra)
         {
             if (palabra.StartsWith("Q"))
