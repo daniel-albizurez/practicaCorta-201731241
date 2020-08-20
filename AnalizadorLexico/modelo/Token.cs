@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AnalizadorLexico.modelo
 {
-    class Lexema
+    class Token
     {
         public string tipo { get; set; }
         public string lexema { get; set; }
