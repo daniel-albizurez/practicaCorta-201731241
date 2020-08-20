@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AnalizadorLexico"
         mc:Ignorable="d"
-        Title="MainWindow" Height="467.505" Width="659.956">
+        Title="MainWindow" Height="470" Width="660">
     <Grid Margin="0,0,-8,-4">
-        <Button Content="Analizar" HorizontalAlignment="Left" Margin="121,253,0,0" VerticalAlignment="Top" Width="93" AutomationProperties.Name="btnAnalizar" Height="34"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="40,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="251" AutomationProperties.Name="txtOracion" ToolTip="Ingrese una oración a analizar"/>
-        <DataGrid HorizontalAlignment="Left" Height="293" VerticalAlignment="Top" Width="249" Margin="361,54,0,0" AutomationProperties.Name="tblResultado"/>
+        <Button Content="Analizar" HorizontalAlignment="Left" Margin="121,253,0,0" VerticalAlignment="Top" Width="93" AutomationProperties.Name="btnAnalizar" Height="34" Click="Button_Click"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="40,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="251" x:Name="txtOracion" ToolTip="Ingrese una oración a analizar"/>
+        <DataGrid HorizontalAlignment="Left" Height="293" VerticalAlignment="Top" Width="250" Margin="361,54,0,0" x:Name="tblResultado" Grid.Column="2">
+        </DataGrid>
 
     </Grid>
 </Window>
